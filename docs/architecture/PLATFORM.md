@@ -263,17 +263,18 @@ If the answer is no, the capability likely belongs outside the platform.
 
 ---
 
+---
+
 # Step 3 – Core Business Capabilities
 
 NODS is organized around business capabilities rather than technical components or user interface modules.
 
-A business capability represents a fundamental responsibility that exists within an organization regardless of how software is implemented. Each capability owns its business rules, operational knowledge, and responsibilities while contributing to the platform's Operational Intelligence.
+A business capability represents a fundamental operational responsibility that exists within an organization regardless of how software is implemented. Each capability owns its business rules, operational knowledge, and responsibilities while remaining independent from other capabilities.
 
 The core business capabilities of NODS are:
 
 | Capability | Primary Responsibility |
 |------------|------------------------|
-| Organization | Organizational structure, governance, branches, departments, and teams. |
 | Operations | Execution of daily operational activities, workflows, SOPs, quality assurance, and operational tasks. |
 | Inventory | Inventory lifecycle, stock movement, consumption, transfers, waste, and resource availability. |
 | Procurement | Purchasing, supplier management, receiving, and procurement operations. |
@@ -281,85 +282,258 @@ The core business capabilities of NODS are:
 | Scheduling | Workforce planning, shift management, availability, and workload allocation. |
 | Customer Service | Customer interactions, feedback, service quality, and customer experience. |
 | Maintenance | Asset management, equipment maintenance, preventive maintenance, and facility operations. |
-| Knowledge | SOPs, documentation, operational standards, policies, recipes, and organizational knowledge. |
+| Knowledge | SOPs, documentation, operational standards, policies, recipes, training materials, and organizational knowledge. |
 
-Every business capability contributes operational data and business events that strengthen the platform's Operational Intelligence.
+Every business capability contributes operational events and business knowledge that strengthen the platform's Operational Intelligence.
 
-Capabilities are intentionally independent and communicate through well-defined architectural boundaries. Cross-cutting concerns such as Operational Intelligence, Security, Notifications, Reporting, and Automation are platform capabilities rather than business capabilities.
+Business capabilities remain independent and communicate through well-defined architectural boundaries.
 
+Cross-cutting concerns such as Operational Intelligence, Reporting, Notifications, Security, Automation, and Search are platform capabilities rather than business capabilities.
 ---
 
 # Step 4 – Platform Layers
 
-NODS is organized into architectural layers that separate foundational platform concerns, business capabilities, supporting services, and external integrations.
+The NODS platform is organized into architectural layers that clearly separate foundational platform concerns, business capabilities, shared platform services, and external integrations.
 
-These layers define architectural responsibilities rather than implementation details and establish clear boundaries for how the platform evolves over time.
+These layers define architectural responsibilities rather than implementation details and provide clear ownership throughout the platform.
 
 ---
 
 ## Platform Foundation
 
-The Platform Foundation provides the capabilities required for the platform itself to operate.
+The Platform Foundation provides the capabilities required for the platform itself to exist.
 
-It establishes organizational structure, governance, identity, authorization, security, and platform-wide configuration.
+It establishes the organizational structure, identity, governance, authorization, security, tenant management, and platform-wide configuration upon which every other capability depends.
 
-All other layers depend on the Platform Foundation.
+Platform Foundation includes responsibilities such as:
+
+- Organization Management
+- Identity & Authentication
+- Authorization & Permissions
+- Security
+- Governance
+- Platform Configuration
+
+No business capability may bypass or duplicate responsibilities owned by the Platform Foundation.
 
 ---
 
 ## Business Capabilities
 
-Business Capabilities represent the core responsibilities of the platform.
+Business Capabilities represent the operational responsibilities performed by an organization.
 
-Each capability owns its business rules, operational knowledge, and domain responsibilities while remaining independent from other capabilities.
+Each capability owns its business rules, domain knowledge, and operational responsibilities while remaining independent from other capabilities.
 
-Business Capabilities form the core of the NODS platform.
+The Business Capabilities of NODS are:
+
+- Operations
+- Inventory
+- Procurement
+- Workforce
+- Scheduling
+- Customer Service
+- Maintenance
+- Knowledge
+
+Business Capabilities execute work and generate the operational events that drive the platform's continuous learning.
 
 ---
 
 ## Platform Services
 
-Platform Services provide shared capabilities that support business operations without owning business rules.
+Platform Services provide reusable capabilities that support business operations without owning business rules.
 
 Examples include:
 
-- Notifications
 - Reporting
+- Notifications
 - Search
-- Audit
+- Audit Logging
 - File Management
-- Workflow Orchestration
+- Workflow Engine
 - Automation
 - Integration Services
 
-Platform Services may be used by multiple Business Capabilities but never replace or duplicate domain ownership.
+Platform Services are shared across multiple business capabilities while preserving domain ownership.
 
 ---
 
 ## External Ecosystem
 
-Organizations depend on specialized systems beyond the scope of NODS.
+Organizations rely on specialized systems beyond the scope of NODS.
 
-The External Ecosystem consists of third-party platforms and services that integrate with NODS while remaining the authoritative owner of their respective responsibilities.
+These systems remain the authoritative owner of their respective responsibilities while integrating with NODS to strengthen operational understanding.
 
-Examples include accounting systems, payroll providers, banking services, payment platforms, government systems, and external AI providers.
+Examples include:
+
+- Accounting Systems
+- Payroll Systems
+- Banking Services
+- Payment Providers
+- Government Services
+- Communication Platforms
+- Email Providers
+- External AI Services
+
+NODS integrates with these systems rather than replacing them.
 
 ---
 
 ## Operational Intelligence
 
-Operational Intelligence is a cross-platform capability that spans every architectural layer rather than existing as an independent module.
+Operational Intelligence is a cross-platform capability that spans the entire architecture rather than existing as an independent module.
 
-It continuously observes operational activities, transforms business data into organizational knowledge, identifies patterns, predicts future operational outcomes, and generates recommendations that help organizations improve over time.
+It continuously observes operational activities, transforms business events into organizational knowledge, identifies patterns, predicts operational outcomes, and generates evidence-based recommendations.
 
 Every Business Capability contributes operational knowledge, while Platform Services and External Integrations enrich the platform's understanding of organizational behavior.
 
 ---
 
-## Layering Principle
+## Layering Principles
 
-The NODS platform follows one fundamental architectural principle:
+The platform follows the following architectural principles:
 
-> **Business Capabilities execute work. Platform Services enable work. Operational Intelligence continuously learns from work.**
+- Platform Foundation enables the platform.
+- Business Capabilities execute business operations.
+- Platform Services support business capabilities.
+- External Systems extend the platform through integration.
+- Operational Intelligence continuously learns across every layer.
 
-Every architectural decision should reinforce this separation of responsibilities while maintaining clear ownership and minimizing unnecessary coupling between capabilities.
+These responsibilities are intentionally separated to preserve clear ownership, minimize coupling, and ensure long-term maintainability.
+
+---
+
+# Step 5 – Architectural Principles
+
+The architecture of NODS is governed by a set of principles that define how the platform is designed, evolved, and maintained.
+
+These principles are technology-independent and serve as the foundation for all architectural decisions throughout the platform.
+
+---
+
+## 1. Business Defines Architecture
+
+Business capabilities determine the architecture of the platform.
+
+Technology exists to implement business responsibilities rather than shape them.
+
+---
+
+## 2. Single Ownership
+
+Every business responsibility shall have exactly one owner.
+
+Business rules must never be duplicated across multiple capabilities or services.
+
+---
+
+## 3. Capability-Centric Design
+
+Every feature, workflow, and business rule belongs to a single Business Capability or Platform Service.
+
+Ownership must always be explicit.
+
+---
+
+## 4. Platform Foundation First
+
+Platform Foundation provides shared capabilities required by every Business Capability.
+
+Identity, organization, governance, authorization, and security are foundational responsibilities and must not be reimplemented elsewhere.
+
+---
+
+## 5. Operational Intelligence is Cross-Platform
+
+Operational Intelligence is a platform-wide capability rather than an independent module.
+
+Every Business Capability contributes operational knowledge that continuously improves the platform's understanding of the organization.
+
+---
+
+## 6. Integrate Rather Than Replace
+
+NODS owns operational knowledge while integrating specialized systems for responsibilities outside its architectural boundaries.
+
+The platform should enrich operational understanding rather than duplicate external systems.
+
+---
+
+## 7. Loose Coupling Through Clear Boundaries
+
+Business Capabilities remain independently evolvable.
+
+Communication between capabilities should occur through clearly defined architectural boundaries while preserving ownership and minimizing coupling.
+
+---
+
+## 8. Evolution Through Knowledge
+
+Every operational event contributes to the organization's accumulated knowledge.
+
+As organizational knowledge grows, the platform continuously improves the quality of its insights, recommendations, and decision support.
+
+---
+
+## Architectural Commitment
+
+Every architectural decision made within NODS shall reinforce these principles.
+
+When a proposed change conflicts with one or more principles, the decision must be reviewed and formally justified through an Architecture Decision Record (ADR).
+
+---
+
+# Step 6 – Platform Context Diagram
+
+The Platform Context Diagram provides a high-level view of the NODS platform and illustrates the relationship between its major architectural areas.
+
+The diagram is conceptual and intentionally technology-independent. It describes how responsibilities are organized within the platform rather than how software components are implemented.
+
+```text
+┌──────────────────────────────────────────────────────────────────────┐
+│                           NODS Platform                              │
+│                                                                      │
+│  ┌──────────────────────────────────────────────────────────────┐    │
+│  │                   Platform Foundation                        │    │
+│  │                                                              │    │
+│  │ Organization • Identity • Authorization • Security           │    │
+│  └──────────────────────────────────────────────────────────────┘    │
+│                                                                      │
+│  ┌──────────────────────────────────────────────────────────────┐    │
+│  │                 Core Business Capabilities                   │    │
+│  │                                                              │    │
+│  │ • Operations                                                 │    │
+│  │ • Inventory                                                  │    │
+│  │ • Procurement                                                │    │
+│  │ • Workforce                                                  │    │
+│  │ • Scheduling                                                 │    │
+│  │ • Customer Service                                           │    │
+│  │ • Maintenance                                                │    │
+│  │ • Knowledge                                                  │    │
+│  └──────────────────────────────────────────────────────────────┘    │
+│                                                                      │
+│  ┌──────────────────────────────────────────────────────────────┐    │
+│  │                  Shared Platform Services                    │    │
+│  │                                                              │    │
+│  │ Reporting • Notifications • Search • Audit                  │    │
+│  │ Workflow • Automation • Integrations                        │    │
+│  └──────────────────────────────────────────────────────────────┘    │
+│                                                                      │
+│══════════════════════════════════════════════════════════════════════│
+│                                                                      │
+│                  Operational Intelligence                           │
+│                                                                      │
+│      Cross-platform capability spanning the entire platform.         │
+│      Continuously observes, learns, predicts, and recommends.        │
+│                                                                      │
+└──────────────────────────────────────────────────────────────────────┘
+```
+
+## Layer Responsibilities
+
+| Layer | Responsibility |
+|--------|----------------|
+| Platform Foundation | Provides shared platform capabilities required by every other layer. |
+| Core Business Capabilities | Owns business rules, operational responsibilities, and domain knowledge. |
+| Shared Platform Services | Provides reusable platform-wide services without owning business rules. |
+| Operational Intelligence | Continuously transforms operational activities into organizational knowledge, insights, predictions, and recommendations across the platform. |
