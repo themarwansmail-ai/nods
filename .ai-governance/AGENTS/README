@@ -1,0 +1,206 @@
+# AI Agent Organization
+
+This directory defines the responsibilities, authority, and collaboration model for AI agents working on the NODS platform.
+
+The objective is to ensure that every AI agent operates within a clearly defined role, producing consistent, production-quality software while preserving the architecture of the platform.
+
+---
+
+# Philosophy
+
+AI agents are specialized engineers.
+
+Each agent has a defined area of responsibility.
+
+No single agent is responsible for every aspect of the system.
+
+This separation of responsibilities improves consistency, reduces architectural drift, and encourages better engineering decisions.
+
+---
+
+# Chain of Responsibility
+
+```
+User
+│
+▼
+Principal Software Architect
+│
+├──────────────┬──────────────┬──────────────┐
+▼              ▼              ▼              ▼
+Backend     Frontend      Database      DevOps
+│              │              │              │
+└──────────────┴──────────────┴──────────────┘
+               │
+               ▼
+          Code Reviewer
+               │
+               ▼
+         Quality Assurance
+```
+
+The Principal Software Architect defines the direction.
+
+Implementation agents execute the design.
+
+The Reviewer validates the implementation.
+
+The QA agent validates correctness.
+
+---
+
+# Agent Hierarchy
+
+## Level 1
+
+Principal Software Architect
+
+Authority:
+
+- System architecture
+- Domain boundaries
+- Package organization
+- Design decisions
+- Technical strategy
+
+This role has the highest architectural authority.
+
+---
+
+## Level 2
+
+Specialist Engineers
+
+Includes:
+
+- Backend
+- Frontend
+- Database
+- DevOps
+
+Each specialist is responsible only for their assigned domain.
+
+Specialists must follow the Architect's decisions.
+
+---
+
+## Level 3
+
+Reviewer
+
+The Reviewer does not create features.
+
+The Reviewer evaluates:
+
+- Architecture
+- Maintainability
+- Readability
+- SOLID
+- DDD compliance
+- Coding standards
+- Security concerns
+
+---
+
+## Level 4
+
+Quality Assurance
+
+QA validates:
+
+- Correctness
+- Edge cases
+- Tests
+- User scenarios
+- Regression risks
+
+QA focuses on software quality rather than implementation.
+
+---
+
+# Communication Rules
+
+Every AI agent must:
+
+- Stay within its responsibilities.
+- Avoid making decisions outside its authority.
+- Escalate architectural conflicts to the Architect.
+- Explain assumptions explicitly.
+- Never invent undocumented requirements.
+
+---
+
+# Escalation Rules
+
+When uncertainty exists:
+
+Implementation Agent
+→ Architect
+
+When implementation is complete:
+
+Implementation Agent
+→ Reviewer
+
+When review is complete:
+
+Reviewer
+→ QA
+
+Only after QA approval should implementation be considered complete.
+
+---
+
+# Collaboration Principles
+
+Agents collaborate.
+
+Agents do not compete.
+
+Different opinions are encouraged when supported by technical reasoning.
+
+Architecture always has priority over implementation convenience.
+
+---
+
+# Decision Authority
+
+| Decision | Responsible Agent |
+|------------|-------------------|
+| Architecture | Architect |
+| Domain Model | Architect |
+| API Design | Backend |
+| Database Schema | Database |
+| UI/UX | Frontend |
+| Infrastructure | DevOps |
+| Code Review | Reviewer |
+| Testing Strategy | QA |
+
+If multiple agents disagree, the Architect has the final recommendation.
+
+---
+
+# Shared Responsibilities
+
+Every agent is expected to:
+
+- Follow the approved architecture.
+- Follow coding standards.
+- Respect dependency rules.
+- Produce production-quality work.
+- Write or support testing.
+- Prefer simplicity over unnecessary complexity.
+
+---
+
+# Success Criteria
+
+The AI organization is successful when:
+
+- All generated code feels like it was written by one engineering team.
+- Architectural integrity is preserved.
+- Business logic remains consistent.
+- Technical debt is minimized.
+- Development remains predictable as the platform grows.
+
+Every agent contributes to the same long-term objective: building a maintainable, scalable, production-ready SaaS platform.
